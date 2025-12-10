@@ -1,0 +1,23 @@
+﻿
+
+StatusCode        : 200
+StatusDescription : 
+Content           : [{"id":1,"roomId":"4502","name":"è½¯ä»¶å¼åå®éªå®¤","equipmentInfo":"ä¸­","totalSeats":4,"availableSeats":2,"allowedRoles":"all","managerId":"2305006152","status":"æ­£å¸¸","cre
+                    atedAt":"2025-11-28T...
+RawContent        : HTTP/1.1 200 
+                    Vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+                    X-Content-Type-Options: nosniff
+                    X-XSS-Protection: 0
+                    Pragma: no-cache
+                    X-Frame-Options: DENY
+                    Transfer-Encodi...
+Forms             : {}
+Headers           : {[Vary, Origin,Access-Control-Request-Method,Access-Control-Request-Headers], [X-Content-Type-Options, nosniff], [X-XSS-Protection, 0], [Pragma, no-cache]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 923
+
+
+
