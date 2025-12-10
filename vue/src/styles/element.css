@@ -1,0 +1,24 @@
+/* Element Plus 主题变量 */
+:root {
+  --el-color-primary: #009688;
+  --el-color-primary-light-3: #33a89d;
+  --el-color-primary-light-5: #66c2b8;
+  --el-color-primary-light-8: #ccf1ed;
+  --el-color-primary-dark-2: #007a6d;
+  --el-color-primary-dark-5: #005c52;
+  --el-color-primary-dark-8: #003d36;
+}
+
+/* 深色主题 */
+html.dark {
+  --el-bg-color: #141414;
+  --el-bg-color-page: #0a0a0a;
+  --el-bg-color-overlay: #1d1e1f;
+  --el-text-color-primary: #ffffff;
+  --el-text-color-regular: #d0d0d0;
+  --el-text-color-secondary: #a0a0a0;
+  --el-text-color-placeholder: #707070;
+  --el-border-color: #434343;
+  --el-border-color-light: #303030;
+  --el-border-color-extra-light: #202020;
+}

@@ -1,0 +1,80 @@
+@import 'base.css';
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+
+/* Element Plus 样式覆盖 */
+.el-button {
+  border-radius: 6px;
+}
+
+.el-table .el-table__row {
+  height: 52px;
+}
+
+/* 卡片悬停效果 */
+.el-card {
+  transition: box-shadow 0.3s;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.el-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 表单样式 */
+.el-form {
+  border: none;
+}
+
+.el-form-item {
+  border: none;
+}
+
+/* 深色主题适配 */
+html.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+html.dark .el-card {
+  background-color: #1d1e1f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .el-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .el-form {
+  background-color: transparent;
+  border: none;
+}
+
+html.dark .el-form-item {
+  border: none;
+}
