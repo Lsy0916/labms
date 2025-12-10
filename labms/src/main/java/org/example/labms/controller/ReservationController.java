@@ -24,13 +24,21 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    // 获取所有预约信息
+    /**
+     * 获取所有预约信息
+     * @return 预约信息列表
+     */
     @GetMapping("/reservations/all")
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
     }
 
-    // 获取指定教室指定日期的预约信息
+    /**
+     * 获取指定教室指定日期的预约信息
+     * @param roomId 机房ID
+     * @param reservationDate 预约日期
+     * @return 预约信息列表
+     */
     @GetMapping("/reservations")
     public List<Reservation> getReservationsByRoomIdAndDate(
             @RequestParam String roomId,
@@ -38,7 +46,14 @@ public class ReservationController {
         return reservationService.getReservationsByRoomIdAndDate(roomId, reservationDate);
     }
 
-    // 获取指定教室指定日期指定时间段的预约信息
+    /**
+     * 获取指定教室指定日期指定时间段的预约信息
+     * @param roomId 机房ID
+     * @param reservationDate 预约日期
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @return 预约信息列表
+     */
     @GetMapping("/reservations/time")
     public List<Reservation> getReservationsByRoomIdAndDateAndTime(
             @RequestParam String roomId,
@@ -49,13 +64,22 @@ public class ReservationController {
         return reservationService.getReservationsByRoomIdAndDateAndTime(roomId, reservationDate, startTime, endTime);
     }
     
-    // 根据用户ID获取预约信息
+    /**
+     * 根据用户ID获取预约信息
+     * @param userId 用户ID
+     * @return 预约信息列表
+     */
     @GetMapping("/reservations/user")
     public List<Reservation> getReservationsByUserId(@RequestParam String userId) {
         return reservationService.getReservationsByUserId(userId);
     }
     
-    // 取消预约
+    /**
+     * 取消预约
+     * @param reservationId 预约ID
+     * @param userId 用户ID
+     * @return 取消结果信息
+     */
     @DeleteMapping("/reservations")
     public ResponseEntity<String> cancelReservation(
             @RequestParam String reservationId,
@@ -68,7 +92,12 @@ public class ReservationController {
         }
     }
     
-    // 更新预约状态
+    /**
+     * 更新预约状态
+     * @param reservationId 预约ID
+     * @param status 预约状态
+     * @return 更新结果信息
+     */
     @PutMapping("/reservations/status")
     public ResponseEntity<String> updateReservationStatus(
             @RequestParam String reservationId,
@@ -81,7 +110,11 @@ public class ReservationController {
         }
     }
     
-    // 删除预约
+    /**
+     * 删除预约
+     * @param reservationId 预约ID
+     * @return 删除结果信息
+     */
     @DeleteMapping("/deleteReservation")
     public ResponseEntity<String> deleteReservation(@RequestParam String reservationId) {
         boolean success = reservationService.deleteReservationById(reservationId);
@@ -92,7 +125,17 @@ public class ReservationController {
         }
     }
     
-    // 创建新的预约 - 使用URL参数
+    /**
+     * 创建新的预约 - 使用URL参数
+     * @param roomId 机房ID
+     * @param reservationDate 预约日期
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param seatIds 座位ID列表
+     * @param mode 预约模式
+     * @param userId 用户ID
+     * @return 创建的预约列表
+     */
     @PostMapping("/reservations")
     public List<Reservation> createReservations(
             @RequestParam String roomId,

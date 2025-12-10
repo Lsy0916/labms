@@ -21,25 +21,45 @@ public class TeacherController {
     @Autowired
     private MailService mailService;
 
-    // 获取所有教师信息
+    /**
+     * 获取所有教师信息
+     * @return 教师信息列表
+     */
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers() {
         return teacherService.getAllTeachers();
     }
-    // 根据teacherId获取教师信息
+    
+    /**
+     * 根据teacherId获取教师信息
+     * @param userId 教师ID
+     * @return 教师信息
+     */
     @GetMapping("/teacher/info_id")
     public ResponseEntity<Teacher> getTeacherByTeacherId(@RequestParam String userId) {
         Optional<Teacher> teacher = teacherService.getTeacherByTeacherId(userId);
         return teacher.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     
-    // 创建或更新教师（包括密码加密）
+    /**
+     * 创建或更新教师（包括密码加密）
+     * @param teacher 教师对象
+     * @return 保存后的教师对象
+     */
     @PostMapping("/teacher")
     public Teacher saveTeacher(@RequestBody Teacher teacher) {
         return teacherService.saveTeacher(teacher);
     }
 
-    // 修改密码
+    /**
+     * 修改密码
+     * @param userId 用户ID
+     * @param roleId 角色ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @param emailVerification 邮箱验证码
+     * @return 修改结果信息
+     */
     @PostMapping("/teacher/update_password")
     public ResponseEntity<String> updatePassword(
             @RequestParam String userId,

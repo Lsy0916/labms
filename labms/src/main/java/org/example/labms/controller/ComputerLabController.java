@@ -16,21 +16,46 @@ public class ComputerLabController {
     @Autowired
     private ComputerLabService computerLabService;
 
+    /**
+     * 获取所有机房信息
+     * @return 机房信息列表
+     */
     @GetMapping
     public List<ComputerLab> getAllComputerLabs() {
         return computerLabService.getAllComputerLabs();
     }
 
+    /**
+     * 根据机房ID获取机房信息
+     * @param roomId 机房ID
+     * @return 机房信息
+     */
     @GetMapping("/{roomId}")
     public ComputerLab getComputerLabByRoomId(@PathVariable String roomId) {
         return computerLabService.getComputerLabByRoomId(roomId);
     }
 
+    /**
+     * 创建机房
+     * @param computerLab 机房对象
+     * @return 创建后的机房对象
+     */
     @PostMapping
     public ComputerLab createComputerLab(@RequestBody ComputerLab computerLab) {
         return computerLabService.createComputerLab(computerLab);
     }
     
+    /**
+     * 更新机房信息
+     * @param roomId 机房ID
+     * @param name 机房名称
+     * @param totalSeats 总座位数
+     * @param allowedRoles 允许使用的角色
+     * @param status 状态
+     * @param managerId 管理员ID
+     * @param equipmentInfo 设备信息
+     * @return 更新后的机房对象
+     */
     @PutMapping("/{roomId}")
     public ResponseEntity<ComputerLab> updateComputerLabInfo(
             @PathVariable String roomId,
@@ -58,6 +83,11 @@ public class ComputerLabController {
         }
     }
     
+    /**
+     * 删除机房
+     * @param roomId 机房ID
+     * @return 删除结果
+     */
     @DeleteMapping("/{roomId}")
     public ResponseEntity<Void> deleteComputerLab(@PathVariable String roomId) {
         try {

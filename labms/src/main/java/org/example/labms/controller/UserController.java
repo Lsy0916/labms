@@ -23,32 +23,53 @@ public class UserController {
     @Autowired
     private MailService mailService;
 
-    // 获取所有用户信息
+    /**
+     * 获取所有用户信息
+     * @return 用户信息列表
+     */
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    // 获取所有用户信息(不包含敏感信息)
+    /**
+     * 获取所有用户信息(不包含敏感信息)
+     * @return 用户信息列表（无敏感信息）
+     */
     @GetMapping("/usersInfo")
     public List<UserInfoResponseDTO> getAllUsersInfo() {
         return userService.getAllUsersWithoutSensitiveInfo();
     }
     
-    // 根据userId获取用户信息
+    /**
+     * 根据userId获取用户信息
+     * @param userId 用户ID
+     * @return 用户信息
+     */
     @GetMapping("/user/info_id")
     public ResponseEntity<User> getUserByUserId(@RequestParam String userId) {
         Optional<User> user = userService.getUserByUserId(userId);
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     
-    // 创建或更新用户（包括密码加密）
+    /**
+     * 创建或更新用户（包括密码加密）
+     * @param user 用户对象
+     * @return 保存后的用户对象
+     */
     @PostMapping("/user")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
     
-    // 更新用户信息（手机号和邮箱）
+    /**
+     * 更新用户信息（手机号和邮箱）
+     * @param userId 用户ID
+     * @param roleId 角色ID
+     * @param phone 电话
+     * @param email 邮箱
+     * @return 更新结果信息
+     */
     @PostMapping("/user/update")
     public ResponseEntity<String> updateUserInfo(
             @RequestParam String userId,
@@ -70,7 +91,17 @@ public class UserController {
         }
     }
     
-    // 新增学生
+    /**
+     * 新增学生
+     * @param userId 学生ID
+     * @param name 姓名
+     * @param gender 性别
+     * @param classId 班级ID
+     * @param major 专业
+     * @param phone 电话
+     * @param email 邮箱
+     * @return 创建的学生对象或错误信息
+     */
     @PostMapping("/user/add_student")
     public ResponseEntity<?> addStudent(
             @RequestParam String userId,
@@ -101,7 +132,11 @@ public class UserController {
         return ResponseEntity.ok(savedStudent);
     }
     
-    // 删除学生信息
+    /**
+     * 删除学生信息
+     * @param userId 学生ID
+     * @return 删除结果信息
+     */
     @DeleteMapping("/user/delete_student")
     public ResponseEntity<String> deleteStudent(@RequestParam String userId) {
         boolean deleted = userService.deleteStudentByUserId(userId);
@@ -112,7 +147,15 @@ public class UserController {
         }
     }
     
-    // 修改密码
+    /**
+     * 修改密码
+     * @param userId 用户ID
+     * @param roleId 角色ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @param emailVerification 邮箱验证码
+     * @return 修改结果信息
+     */
     @PostMapping("/user/update_password")
     public ResponseEntity<String> updatePassword(
             @RequestParam String userId,

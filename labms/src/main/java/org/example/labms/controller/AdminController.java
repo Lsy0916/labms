@@ -32,25 +32,58 @@ public class AdminController {
     @Autowired
     private MailService mailService;
     
-    // 获取所有管理员信息
+    /**
+     * 获取所有管理员信息
+     * @return 管理员信息列表
+     */
     @GetMapping("/admins")
     public List<Admin> getAllAdmins() {
         return adminService.getAllAdmins();
     }
-    // 根据adminId获取管理员信息
+    
+    /**
+     * 根据adminId获取管理员信息
+     * @param userId 管理员ID
+     * @return 管理员信息
+     */
     @GetMapping("/admin/info_id")
     public ResponseEntity<Admin> getAdminByAdminId(@RequestParam String userId) {
         Optional<Admin> admin = adminService.getAdminByAdminId(userId);
         return admin.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     
-    // 创建或更新管理员（包括密码加密）
+    /**
+     * 创建或更新管理员（包括密码加密）
+     * @param admin 管理员对象
+     * @return 保存后的管理员对象
+     */
     @PostMapping("/admin")
     public Admin saveAdmin(@RequestBody Admin admin) {
         return adminService.saveAdmin(admin);
     }
 
-    // 新增用户（根据roleId创建不同类型的用户）
+    /**
+     * 新增用户（根据roleId创建不同类型的用户）
+     * @param roleId 角色ID（admin/teacher/student）
+     * @param name 姓名
+     * @param gender 性别
+     * @param phone 电话
+     * @param email 邮箱
+     * @param password 密码
+     * @param avatarUrl 头像URL
+     * @param adminId 管理员ID
+     * @param department 部门
+     * @param position 职位
+     * @param hireDate 入职日期
+     * @param status 状态
+     * @param teacherId 教师ID
+     * @param title 职称
+     * @param degree 学位
+     * @param userId 学生ID
+     * @param classId 班级ID
+     * @param major 专业
+     * @return 创建的用户对象或错误信息
+     */
     @PostMapping("/admin/create")
     public ResponseEntity<?> createUser(
             // 通用字段
@@ -71,7 +104,6 @@ public class AdminController {
             
             // 教师特有字段
             @RequestParam(required = false) String teacherId,
-            
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String degree,
             
@@ -178,7 +210,12 @@ public class AdminController {
         }
     }
 
-    // 删除用户（根据roleId和userId删除对应的用户）
+    /**
+     * 删除用户（根据roleId和userId删除对应的用户）
+     * @param roleId 角色ID
+     * @param userId 用户ID
+     * @return 删除结果信息
+     */
     @DeleteMapping("/admin/delete")
     public ResponseEntity<String> deleteUser(
             @RequestParam String roleId,
@@ -225,7 +262,15 @@ public class AdminController {
         }
     }
 
-    // 更新管理员信息
+    /**
+     * 更新管理员信息
+     * @param userId 用户ID
+     * @param name 姓名
+     * @param roleId 角色ID
+     * @param phone 电话
+     * @param email 邮箱
+     * @return 更新结果信息
+     */
     @PostMapping("/admin/update")
     public ResponseEntity<String> updateAdminInfo(
             @RequestParam String userId,
@@ -249,7 +294,15 @@ public class AdminController {
         }
     }
 
-    // 修改密码
+    /**
+     * 修改密码
+     * @param userId 用户ID
+     * @param roleId 角色ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @param emailVerification 邮箱验证码
+     * @return 修改结果信息
+     */
     @PostMapping("/admin/update_password")
     public ResponseEntity<String> updatePassword(
             @RequestParam String userId,
@@ -286,7 +339,26 @@ public class AdminController {
         }
     }
 
-    // 更新用户信息
+    /**
+     * 更新用户信息
+     * @param roleId 角色ID
+     * @param userId 用户ID
+     * @param studentId 学生ID
+     * @param teacherId 教师ID
+     * @param adminId 管理员ID
+     * @param name 姓名
+     * @param gender 性别
+     * @param phone 电话
+     * @param email 邮箱
+     * @param classId 班级ID
+     * @param major 专业
+     * @param department 部门
+     * @param title 职称
+     * @param degree 学位
+     * @param hireDate 入职日期
+     * @param position 职位
+     * @return 更新结果信息
+     */
     @PostMapping("/admin/update_user")
     public ResponseEntity<String> updateUserInfo(
             // 通用字段
@@ -385,7 +457,12 @@ public class AdminController {
         }
     }
 
-    // 重置用户密码
+    /**
+     * 重置用户密码
+     * @param roleId 角色ID
+     * @param userId 用户ID
+     * @return 重置结果信息
+     */
     @PostMapping("/admin/reset_password")
     public ResponseEntity<String> resetUserPassword(
             @RequestParam String roleId,

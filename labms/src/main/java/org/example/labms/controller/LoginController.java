@@ -15,7 +15,13 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    // 学生登录
+    /**
+     * 学生登录
+     * @param userId 用户ID
+     * @param password 密码
+     * @param roleId 角色ID
+     * @return 登录响应信息
+     */
     @PostMapping("/student/login")
     public ResponseEntity<LoginResponse> studentLogin(
             @RequestParam String userId,
@@ -24,7 +30,13 @@ public class LoginController {
         return getLoginResponseResponseEntity(userId, password, roleId);
     }
 
-    // 教师登录
+    /**
+     * 教师登录
+     * @param userId 用户ID
+     * @param password 密码
+     * @param roleId 角色ID
+     * @return 登录响应信息
+     */
     @PostMapping("/teacher/login")
     public ResponseEntity<LoginResponse> teacherLogin(
             @RequestParam String userId,
@@ -33,7 +45,13 @@ public class LoginController {
         return getLoginResponseResponseEntity(userId, password, roleId);
     }
 
-    // 管理员登录
+    /**
+     * 管理员登录
+     * @param userId 用户ID
+     * @param password 密码
+     * @param roleId 角色ID
+     * @return 登录响应信息
+     */
     @PostMapping("/admin/login")
     public ResponseEntity<LoginResponse> adminLogin(
             @RequestParam String userId,
@@ -41,6 +59,14 @@ public class LoginController {
             @RequestParam String roleId) {
         return getLoginResponseResponseEntity(userId, password, roleId);
     }
+    
+    /**
+     * 用户认证处理
+     * @param userId 用户ID
+     * @param password 密码
+     * @param roleId 角色ID
+     * @return 登录响应信息
+     */
     private ResponseEntity<LoginResponse> getLoginResponseResponseEntity(@RequestParam String userId, @RequestParam String password, @RequestParam String roleId) {
         LoginRequest loginRequest = new LoginRequest(userId, password, roleId);
         LoginResponse response = loginService.authenticate(
